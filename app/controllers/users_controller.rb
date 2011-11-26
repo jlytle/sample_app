@@ -17,6 +17,9 @@ class UsersController < ApplicationController
       redirect_to @user
     else
       @title = "Sign up"
+      # Assigning "nil" and calling the "clear" method both do the same thing. I left both ways in for clarity.
+      @user.password.clear
+      @user.password_confirmation = nil
       render 'new'
     end
   end
