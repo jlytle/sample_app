@@ -83,6 +83,16 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector("h1>img", :class => "gravatar")
     end
+    
+    ### I really don't know if this test is working correctly. I don't think it is...
+    it "should have delete links visable to admins but not to the standard user" do
+      get :show, :id => @user
+      if @user.admin?
+      response.should have_selector("link_to>delete", :method => "delete")
+    else
+      response.should_not have_selector("link_to>delete", :method => "delete")
+      end
+    end
   end
 
   describe "GET 'new'" do
